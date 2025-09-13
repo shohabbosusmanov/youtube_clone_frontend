@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+html {
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+button,
+.logo {
+    cursor: pointer !important;
+}
