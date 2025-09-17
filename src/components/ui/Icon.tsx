@@ -37,9 +37,10 @@ interface IconProps {
     restricted_mode_icon: () => JSX.Element;
     location_icon: () => JSX.Element;
     keyboard_icon: () => JSX.Element;
+    share_icon: () => JSX.Element;
+    public_icon: () => JSX.Element;
+    close_icon: () => JSX.Element;
 }
-
-// style="pointer-events: none; display: inherit; width: 100%; height: 100%;"
 
 const Icon: IconProps = {
     bars: () => {
@@ -657,6 +658,54 @@ const Icon: IconProps = {
                 aria-hidden="true"
             >
                 <path d="M16 16H8v-2h8v2zm0-5h-2v2h2v-2zm3 0h-2v2h2v-2zm-6 0h-2v2h2v-2zm-3 0H8v2h2v-2zm-3 0H5v2h2v-2zm9-3h-2v2h2V8zm3 0h-2v2h2V8zm-6 0h-2v2h2V8zm-3 0H8v2h2V8zM7 8H5v2h2V8zm15-3v14H2V5h20zm-1 1H3v12h18V6z"></path>
+            </svg>
+        );
+    },
+    share_icon: () => {
+        return (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                focusable="false"
+                aria-hidden="true"
+            >
+                <path d="M15 5.63 20.66 12 15 18.37V14h-1c-3.96 0-7.14 1-9.75 3.09 1.84-4.07 5.11-6.4 9.89-7.1l.86-.13V5.63M14 3v6C6.22 10.13 3.11 15.33 2 21c2.78-3.97 6.44-6 12-6v6l8-9-8-9z"></path>
+            </svg>
+        );
+    },
+    public_icon: () => {
+        return (
+            <svg
+                className="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+            </svg>
+        );
+    },
+    close_icon: () => {
+        return (
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                enableBackground="new 0 0 24 24"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                focusable="false"
+                aria-hidden="true"
+            >
+                <path d="m12.71 12 8.15 8.15-.71.71L12 12.71l-8.15 8.15-.71-.71L11.29 12 3.15 3.85l.71-.71L12 11.29l8.15-8.15.71.71L12.71 12z"></path>
             </svg>
         );
     },

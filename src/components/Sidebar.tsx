@@ -12,7 +12,6 @@ const allItems = [
         icon: <Icon.subscriptions />,
         href: "/subscriptions",
     },
-    { label: "You", icon: <Icon.user_icon />, href: "/you" },
     { label: "Downloads", icon: <Icon.downloads_icon />, href: "/downloads" },
     {
         label: "History",
@@ -22,7 +21,7 @@ const allItems = [
     {
         label: "Playlists",
         icon: <Icon.playlists_icon />,
-        href: "/playlists",
+        href: "#",
     },
     {
         label: "You videos",
@@ -34,7 +33,7 @@ const allItems = [
         icon: <Icon.watch_later_icon />,
         href: "/watch-later",
     },
-    { label: "Liked videos", icon: <Icon.downloads_icon />, href: "/liked" },
+    { label: "Liked videos", icon: <Icon.liked_videos_icon />, href: "/liked" },
 ];
 
 const Sidebar = () => {

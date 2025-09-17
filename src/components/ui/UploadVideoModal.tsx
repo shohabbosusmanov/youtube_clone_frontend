@@ -1,14 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useModalStore } from "@/store/uploadModalStore";
+import { BaseUrl } from "@/app/page";
 
-type UploadModalProps = {
-    onClose: () => void;
-};
-
-export default function UploadModal({ onClose }: UploadModalProps) {
+export default function UploadModal() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [file, setFile] = useState<File | null>(null);
@@ -17,6 +15,7 @@ export default function UploadModal({ onClose }: UploadModalProps) {
     const [videoId, setVideoId] = useState<string>("");
     const [loading, setLoading] = useState(false);
 
+    const closeModal = useModalStore((state) => state.close);
     const router = useRouter();
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -33,17 +32,17 @@ export default function UploadModal({ onClose }: UploadModalProps) {
     const pollStatus = async (id: string) => {
         const interval = setInterval(async () => {
             try {
-                const resp = await axios.get(
-                    `http://localhost:4000/video/status/${id}`,
-                    {
-                        withCredentials: true,
-                    }
-                );
+                const resp = await axios.get(`${BaseUrl}/video/status/${id}`, {
+                    withCredentials: true,
+                });
+
                 const st = resp.data.status;
                 setStatus(st);
                 if (st === "done") {
                     clearInterval(interval);
+                    setLoading(false);
                     router.push("/my-videos");
+                    closeModal();
                 }
                 if (st === "error") {
                     clearInterval(interval);
@@ -69,20 +68,16 @@ export default function UploadModal({ onClose }: UploadModalProps) {
             formData.append("description", description);
             formData.append("file", file);
 
-            const resp = await axios.post(
-                "http://localhost:4000/video/upload",
-                formData,
-                {
-                    withCredentials: true,
-                    headers: { "Content-Type": "multipart/form-data" },
-                    onUploadProgress: (e) => {
-                        if (e.total) {
-                            const perc = Math.round((e.loaded * 100) / e.total);
-                            setUploadProgress(perc);
-                        }
-                    },
-                }
-            );
+            const resp = await axios.post(`${BaseUrl}/video/upload`, formData, {
+                withCredentials: true,
+                headers: { "Content-Type": "multipart/form-data" },
+                onUploadProgress: (e) => {
+                    if (e.total) {
+                        const perc = Math.round((e.loaded * 100) / e.total);
+                        setUploadProgress(perc);
+                    }
+                },
+            });
 
             const id = resp.data.videoId;
             setVideoId(id);
@@ -159,9 +154,8 @@ export default function UploadModal({ onClose }: UploadModalProps) {
 
                 <div className="flex justify-end gap-4 mt-4">
                     <button
-                        onClick={onClose}
+                        onClick={closeModal}
                         className="px-4 py-2 rounded bg-gray-600 hover:bg-gray-700"
-                        disabled={loading}
                     >
                         Cancel
                     </button>

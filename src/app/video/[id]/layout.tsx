@@ -11,14 +11,14 @@ export default function MyVideosLayout({
             <div className=" sticky top-0 z-50 bg-[#0f0f0f] opacity-90 shadow">
                 <Header />
             </div>
-            <div className="flex flex-1 overflow-hidden justify-center">
+            <main className="flex flex-1 overflow-hidden justify-center">
                 <div className=" self-start h-full sticky top-0 bg-[#0f0f0f] overflow-auto shadow">
                     <Sidebar />
                 </div>
-                <main className="flex-1 h-full overflow-y-auto p-4">
+                <div className="flex-1 h-full overflow-y-auto p-4">
                     {children}
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
     );
 }

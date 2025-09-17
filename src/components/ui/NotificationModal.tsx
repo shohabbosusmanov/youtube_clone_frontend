@@ -1,30 +1,3 @@
-// import { useModalStore } from "@/store/notificationModalStore";
-// import { Modal } from "antd";
-
-// const NotificationModal = () => {
-//     const isModalOpen = useModalStore((state) => state.isOpen);
-//     const setIsOpen = useModalStore((state) => state.setIsOpen);
-
-//     return (
-//         <>
-//             <Modal
-//                 title="Notifications"
-//                 mask={false}
-//                 open={isModalOpen}
-//                 onCancel={setIsOpen}
-//                 footer={null}
-//                 closable={true}
-//             >
-//                 <p>Some contents...</p>
-//                 <p>Some contents...</p>
-//                 <p>Some contents...</p>
-//             </Modal>
-//         </>
-//     );
-// };
-
-// export default NotificationModal;
-
 import { useModalStore } from "@/store/notificationModalStore";
 import React, { useEffect, useRef } from "react";
 import Icon from "./Icon";

@@ -9,3 +9,13 @@ button,
 .logo {
     cursor: pointer !important;
 }
+
+:root {
+    --plyr-color-main: #ff0133;
+    --plyr-audio-controls-background: #111;
+    --plyr-audio-control-color: #fff;
+    --plyr-video-control-color: #fff;
+    --plyr-video-controls-background: rgba(0, 0, 0, 0.6);
+    --plyr-tooltip-background: #333;
+    --plyr-tooltip-color: #fff;
+}

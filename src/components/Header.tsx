@@ -10,21 +10,27 @@ import NotificationsDropdown from "./ui/NotificationModal";
 import ProfileDropdown from "./ui/ProfileDropdown";
 import Link from "next/link";
 import SettingsDropdown from "./ui/SettingsDropdown";
+import { useSearchStore } from "@/store/searchStore";
+import { BaseUrl } from "@/app/page";
 
 const Header = () => {
     const setUser = useAuthStore((state) => state.setUser);
     const user = useAuthStore((state) => state.user);
     const toggle = useSidebarStore((s) => s.toggle);
 
+    const query = useSearchStore((state) => state.query);
+    const setQuery = useSearchStore((state) => state.setQuery);
+
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value);
+    };
+
     useEffect(() => {
         async function fetchUser() {
             try {
-                const { data } = await axios.get(
-                    "http://localhost:4000/auth/me",
-                    {
-                        withCredentials: true,
-                    }
-                );
+                const { data } = await axios.get(`${BaseUrl}/auth/me`, {
+                    withCredentials: true,
+                });
                 if (data.user) {
                     setUser(data.user);
                 }
@@ -36,8 +42,7 @@ const Header = () => {
     }, [setUser]);
 
     const login = () => {
-        window.location.href =
-            "http://localhost:4000/auth/google?prompt=select_account";
+        window.location.href = `${BaseUrl}/auth/google?prompt=select_account`;
     };
 
     return (
@@ -67,6 +72,8 @@ const Header = () => {
                         </span>
                         <input
                             type="text"
+                            value={query}
+                            onChange={onInputChange}
                             placeholder="Search"
                             className=" outline-none grow"
                         />
@@ -90,9 +97,6 @@ const Header = () => {
                     </>
                 ) : (
                     <>
-                        {/* <button className="p-2">
-                            <Icon.more_vert />
-                        </button> */}
                         <SettingsDropdown />
                         <button
                             onClick={login}

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Icon from "./Icon";
 import { useAuthStore } from "@/store/authStore";
 import axios from "axios";
+import { BaseUrl } from "@/app/page";
 
 const profileItems = [
     { label: "Google account", icon: <Icon.google_icon />, href: "#" },
@@ -68,7 +69,7 @@ const ProfileDropdown = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:4000/auth/signout", {
+            await axios.post(`${BaseUrl}/auth/signout`, {
                 withCredentials: true,
             });
         } catch (err) {
